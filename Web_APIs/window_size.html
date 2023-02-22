@@ -19,13 +19,16 @@
     <div class="tag">window</div>
     <script>
       const tag = document.querySelector('.tag');
-      window.addEventListener('resize', () => {
+      function updateTag() {
         tag.innerHTML = `
         window.screen: ${window.screen.width},${window.screen.height} <br/>
         window.outer: ${window.outerWidth}, ${window.outerHeight} <br/>
         window.inner: ${window.innerWidth}, ${window.innerHeight} <br/>
-        documentElement.sclientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight} 
+        documentElement.sclientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
         `;
+      }
+      ['load', 'resize'].forEach((evt) => {
+        window.addEventListener(evt, updateTag);
       });
     </script>
   </body>

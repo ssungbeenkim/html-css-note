@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      .d {
+        background-color: aqua;
+        width: 250px;
+        height: 250px;
+        margin-bottom: 24px;
+      }
+
+      .box3 {
+        background-color: yellowgreen;
+      }
+
+      button {
+        width: 125px;
+        height: 60px;
+        font-size: 32px;
+        margin: 30px;
+      }
+
+      .buttons {
+        position: absolute;
+        box-sizing: content-box;
+        display: flex;
+        justify-content: flex-end;
+        position: sticky;
+        top: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d box1"></div>
+    <div class="d box2"></div>
+    <div class="d box3"></div>
+    <div class="d box4"></div>
+    <div class="d box5"></div>
+    <div class="d box6"></div>
+    <div class="d box7"></div>
+    <div class="d box8"></div>
+    <div class="d box9"></div>
+    <div class="d box10"></div>
+  </body>
+  <script>
+    const box = document.querySelector('.box3');
+    function printCoordinate(e) {
+      const rect = box.getBoundingClientRect();
+      console.log(rect);
+      console.log(
+        `
+      client: ${e.clientX}, ${e.clientY}
+      page: ${e.pageX}, ${e.pageY}
+      `
+      );
+    }
+    box.addEventListener('click', printCoordinate);
+  </script>
+</html>
