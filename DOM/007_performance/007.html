@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: green;
+        margin: 0;
+      }
+      .ver {
+        background-color: white;
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        /* left: 50%; */
+        transform: translateX(499px);
+      }
+      .hor {
+        background-color: white;
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        /* top: 50%; */
+        transform: translateY(499px);
+      }
+
+      .scope {
+        position: absolute;
+        /* top: 50%; */
+        /* left: 50%; */
+        transform: translate(440px, 440px);
+      }
+
+      .info {
+        position: absolute;
+        /* top: 50%; */
+        /* left: 50%; */
+        color: white;
+        font-size: 32px;
+        transform: translate(515px, 515px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ver"></div>
+    <div class="hor"></div>
+    <img src="img/target.png" alt="scope" class="scope" />
+    <span class="info"> 123px, 456px </span>
+  </body>
+  <script defer>
+    const info = document.querySelector('.info');
+    const ver = document.querySelector('.ver');
+    const hor = document.querySelector('.hor');
+    const scope = document.querySelector('.scope');
+    function update(e) {
+      const x = e.clientX;
+      const y = e.clientY;
+      info.innerHTML = `
+        ${x}px, ${y}px
+      `;
+      info.style.transform = `translate(${x + 15}px, ${y + 15}px)`; // css 에서 margin으로 할 수 있다.
+      scope.style.transform = `translate(${x - 60}px, ${y - 60}px)`; // rect 값을 받아와서 할 수 있다.
+      ver.style.transform = `translateX(${x - 1}px)`;
+      hor.style.transform = `translateY(${y - 1}px)`;
+    }
+    window.addEventListener('mousemove', update);
+  </script>
+</html>
