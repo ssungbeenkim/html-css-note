@@ -1,4 +1,4 @@
-const footerBtn = document.querySelector('.footer__button');
+const addBtn = document.querySelector('.footer__button');
 const input = document.querySelector('.footer__input');
 const deleteBtn = document.querySelector('.item__delete');
 const items = document.querySelector('.items');
@@ -9,13 +9,14 @@ const items = document.querySelector('.items');
 */
 
 function onAdd() {
-  // 사용자의 입력 데이터를 받아옴.
   const text = input.value;
-  // 입력받은 데이터로 요소를 만듦
+  if (text === '') {
+    input.focus();
+    return;
+  }
   const item = createItem(text);
-  // 요소를 리스트에 추가
   items.appendChild(item);
-  // 인풋 초기화 후 포커스
+  item.scrollIntoView({ block: 'center', behavior: 'smooth' });
   input.value = '';
   input.focus();
 }
@@ -31,9 +32,12 @@ function createItem(text) {
   itemName.setAttribute('class', 'item__name');
   itemName.textContent = text;
 
-  const itemBtn = document.createElement('button');
-  itemBtn.setAttribute('class', 'item__delete');
-  itemBtn.innerHTML = '<i class="fa-sharp fa-solid fa-trash-can"></i>';
+  const itemDelete = document.createElement('button');
+  itemDelete.setAttribute('class', 'item__delete');
+  itemDelete.innerHTML = '<i class="fa-sharp fa-solid fa-trash-can"></i>';
+  itemDelete.addEventListener('click', () => {
+    items.removeChild(itemRow);
+  });
 
   const devider = document.createElement('div');
   devider.setAttribute('class', 'devider');
@@ -41,13 +45,15 @@ function createItem(text) {
   itemRow.appendChild(item);
   itemRow.appendChild(devider);
   item.appendChild(itemName);
-  item.appendChild(itemBtn);
+  item.appendChild(itemDelete);
 
   return itemRow;
 }
 
-input.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
+addBtn.addEventListener('click', onAdd);
+
+input.addEventListener('keyup', (event) => {
+  if (event.key === 'Enter') {
     onAdd();
   }
 });

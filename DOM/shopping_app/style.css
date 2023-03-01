@@ -8,6 +8,7 @@ li {
 
 ul {
   padding: 0;
+  overflow: scroll;
 }
 
 button {
