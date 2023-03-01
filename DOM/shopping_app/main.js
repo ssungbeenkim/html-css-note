@@ -1,11 +1,7 @@
 const addBtn = document.querySelector('.footer__button');
 const input = document.querySelector('.footer__input');
 const items = document.querySelector('.items');
-/* 
-1. 입력창 엔터 눌리면 리스트 추가하고 초기화 포커스 
-2. 버튼 눌리면 리스트 추가하고 초기화 포커스 
-3. 삭제 누르면 리스트 삭제 
-*/
+const form = document.querySelector('.new-form');
 
 function onAdd() {
   const text = input.value;
@@ -36,17 +32,20 @@ function createItem(text) {
   return itemRow;
 }
 
-addBtn.addEventListener('click', () => onAdd());
+// addBtn.addEventListener('click', () => onAdd());
 
-input.addEventListener('keyup', (event) => {
-  if (event.key === 'Enter') {
-    onAdd();
-  }
+// input.addEventListener('keyup', (event) => {
+//   if (event.key === 'Enter') {
+//     onAdd();
+//   }
+// });
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  onAdd();
 });
-
 items.addEventListener('click', (event) => {
   const id = event.target.dataset.id;
-  if (id && event.target.tagName === 'I') {
+  if (id) {
     const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
     toBeDeleted.remove();
   }
