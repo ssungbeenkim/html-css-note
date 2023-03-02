@@ -19,7 +19,7 @@ let id = 0; //UUID
 function createItem(text) {
   const itemRow = document.createElement('li');
   itemRow.setAttribute('class', 'item__row');
-  itemRow.setAttribute('data-id', id);
+  itemRow.setAttribute('data-target-id', id);
   itemRow.innerHTML = `
   <div class="item">
     <span class="item__name">${text}</span>
@@ -46,7 +46,9 @@ form.addEventListener('submit', (event) => {
 items.addEventListener('click', (event) => {
   const id = event.target.dataset.id;
   if (id) {
-    const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
+    const toBeDeleted = document.querySelector(
+      `.item__row[data-target-id="${id}"]`
+    );
     toBeDeleted.remove();
   }
 });
